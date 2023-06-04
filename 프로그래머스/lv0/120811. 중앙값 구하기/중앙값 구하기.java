@@ -14,7 +14,7 @@ class Solution {
                     small_count[i]++;
                 }                
             }
-            if(!(big_count[i] > (array.length / 2)) && !(small_count[i] > (array.length / 2))){
+            if(!(big_count[i] > (array.length >> 1)) && !(small_count[i] > (array.length >> 1))){
                 answer = array[i];
                 break;
             }
