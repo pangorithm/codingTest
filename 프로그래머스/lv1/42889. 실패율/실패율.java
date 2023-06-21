@@ -34,7 +34,7 @@ class Solution {
         
         int[] answer = new int[N];
         for(int i = 0; i < N; i++){
-            System.out.printf("%d %f\n", list.getFirst(), failRate[list.getFirst()]);
+            // System.out.printf("%d %f\n", list.getFirst(), failRate[list.getFirst()]);
             answer[i] = list.poll();
         }
 
