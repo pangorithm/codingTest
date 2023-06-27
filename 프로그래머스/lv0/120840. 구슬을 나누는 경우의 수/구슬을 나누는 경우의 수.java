@@ -1,13 +1,11 @@
 class Solution {
-    public double solution(int balls, int share) {
+    public int solution(int balls, int share) {
         double answer = 1;
-        for(int i = balls; i > Math.max(share, balls - share); i--){
-            answer *= i;
+        int temp = Math.min(share, balls - share);
+        for(int i = 0; i < temp ; i++){
+            answer *= balls - i;
+            answer /= i + 1;
         }
-        return answer / fac(Math.min(share, balls - share));
-    }
-    
-    double fac(int n){
-        return n > 1 ? fac(n - 1) * n : 1;
+        return (int) answer;
     }
 }
