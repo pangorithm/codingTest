@@ -1,11 +1,22 @@
 class Solution {
+    static int[][] ncr;
+        
     public int solution(int balls, int share) {
-        double answer = 1;
-        int temp = Math.min(share, balls - share);
-        for(int i = 0; i < temp ; i++){
-            answer *= balls - i;
-            answer /= i + 1;
+        ncr = new int[balls][Math.min(share, balls - share) + 1];  
+        return getNCR(balls, share);
+    }
+    
+    int getNCR(int n, int r){
+        r = Math.min(r, n - r);
+        if(r == 0){
+            return 1;
+        } else if (r == 1){
+            return n;
         }
-        return (int) answer;
+        if(ncr[n - 1][r] != 0){
+            return ncr[n - 1][r];
+        }
+        ncr[n - 1][r] = getNCR(n - 1, r) + getNCR(n - 1, r - 1);
+        return ncr[n - 1][r];
     }
 }
