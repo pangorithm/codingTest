@@ -6,12 +6,9 @@ class Solution {
         HashMap<String, HashSet> map = new HashMap<>();
         
         for(String[] cloth : clothes){
-            if(map.containsKey(cloth[1])){
-                map.get(cloth[1]).add(cloth[0]);
-            } else {
-                map.put(cloth[1], new HashSet<String>());
-                map.get(cloth[1]).add(cloth[0]);
-            }
+            HashSet<String> set = map.getOrDefault(cloth[1], new HashSet<String>());
+            set.add(cloth[0]);
+            map.put(cloth[1], set);
         }
         
         int answer = 1;
