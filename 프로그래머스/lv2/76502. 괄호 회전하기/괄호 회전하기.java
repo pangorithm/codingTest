@@ -20,8 +20,7 @@ class Solution {
             return false;
         }
         
-        char[] temp = new char[arr.length];
-        int count = 0;
+        char[] temp = new char[arr.length]; 
         int cursor = -1;
         for(int i = 0; i < arr.length; i++){
             if(cursor > -1){
@@ -29,19 +28,16 @@ class Solution {
                     case ')' :
                         if(temp[cursor] == '('){
                             cursor--;
-                            count++;
                         }
                         break;
                     case '}' :
                         if(temp[cursor] == '{'){
                             cursor--;
-                            count++;
                         }
                         break;
                     case ']' :
                         if(temp[cursor] == '['){
                             cursor--;
-                            count++;
                         }
                         break;
                     default:
@@ -52,7 +48,7 @@ class Solution {
                 temp[++cursor] = arr[i];
             }
         }
-        if(count == (arr.length >> 1)){
+        if(cursor == -1){
             return true;
         } else {
             return false;
