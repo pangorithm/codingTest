@@ -9,7 +9,7 @@ class Solution {
         
         HashMap<String, Integer> map = new HashMap<>();
         int answer = 0;
-        loop : for(int day = 0; day < discount.length - want.length; day++){
+        loop : for(int day = 0; day < discount.length - 9; day++){
             for(String item : want){
                 map.put(item, originMap.get(item));
             }
