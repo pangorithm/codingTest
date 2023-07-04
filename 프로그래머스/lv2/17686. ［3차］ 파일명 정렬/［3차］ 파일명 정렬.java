@@ -10,14 +10,13 @@ class Solution {
         
         Comparator<FileName> comparator = Comparator
             .comparing(FileName::getHead, String.CASE_INSENSITIVE_ORDER)
-            .thenComparingInt(FileName::getIntNumber)
+            .thenComparingInt(FileName::getNumber)
             .thenComparingInt(FileName::getIndex);
         Arrays.sort(arr, comparator);
         
         String[] answer = new String[arr.length];
         for(int i = 0; i < arr.length; i++){
-            StringBuilder str = new StringBuilder();
-            answer[i] = str.append(arr[i].head).append(arr[i].number).append(arr[i].tail).toString();
+            answer[i] = files[arr[i].index];
         }
         
         return answer;
@@ -25,7 +24,7 @@ class Solution {
     
     class FileName {
         String head;
-        String number;
+        int number;
         String tail;
         int index;
         
@@ -47,7 +46,7 @@ class Solution {
             }            
             
             this.head = head.toString();
-            this.number = number.toString();
+            this.number = Integer.parseInt(number.toString());
             this.tail = tail.toString();
             this.index = index;            
         }
@@ -56,8 +55,8 @@ class Solution {
             return this.head;
         }
 
-        public int getIntNumber() {
-            return Integer.parseInt(this.number);
+        public int getNumber() {
+            return this.number;
         }
 
         public int getIndex() {
