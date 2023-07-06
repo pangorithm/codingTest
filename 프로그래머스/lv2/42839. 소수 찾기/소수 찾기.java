@@ -25,35 +25,8 @@ class Solution {
         // System.out.println(primeSet);
                 
         HashSet<Integer> set = new HashSet<>();
-        Queue<List> bfs = new LinkedList<>();
+        permutation("", numbers, set);
         
-        for(int i = 0; i < nums.length; i++){
-            
-            bfs.add(new ArrayList<Integer>(i));
-        }
-                
-        while(bfs.size() != 0){
-            List list = bfs.poll();
-            
-            if(list.contains(nums.length)){
-                list.remove((Integer) nums.length);
-                StringBuilder str = new StringBuilder();
-                for(int i = 0; i < list.size(); i++){
-                    str.append(nums[(int) list.get(i)]);
-                }
-                if(str.length() != 0){
-                    set.add(Integer.parseInt(str.toString()));
-                }
-            } else {
-                for(List nextList : getNextLists(list, nums.length)){
-                    if(nextList != null){
-                        bfs.offer(nextList);
-                    }
-                }
-            }
-            
-            
-        }
         // System.out.println(set);
                
         int answer = 0;
@@ -74,16 +47,14 @@ class Solution {
         return answer;
     }
     
-    List[] getNextLists (List<Integer> list, int numsLength){
-        List[] nextLists = new List[numsLength + 1];
-        for(int i = 0; i < numsLength; i++){
-            if(!list.contains(i)){
-                nextLists[i] = new ArrayList(list);
-                nextLists[i].add(i);
-            }
+    void permutation(String prefix, String str, HashSet<Integer> set) {
+        int n = str.length();
+        //if (n == 0) System.out.println(prefix);
+        if(!prefix.equals("")){ 
+            set.add(Integer.valueOf(prefix));
         }
-        nextLists[numsLength] = list;
-        nextLists[numsLength].add(numsLength);
-        return nextLists;
+        for (int i = 0; i < n; i++){
+          permutation(prefix + str.charAt(i), str.substring(0, i) + str.substring(i+1, n), set);
+        }
     }
 }
