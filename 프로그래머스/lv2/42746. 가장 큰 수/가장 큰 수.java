@@ -26,10 +26,8 @@ class Solution {
         
         String answerStr = answer.toString();
         
-        for(char ch : answerStr.toCharArray()){
-            if(ch != '0'){
-                return answerStr;
-            }
+        if(answerStr.charAt(0) != '0'){
+            return answerStr;
         }
         
         return "0";
