@@ -1,34 +1,19 @@
-import java.util.*;
-
+import java.util.Stack;
 class Solution {
     public String solution(String number, int k) {
-        StringBuilder answer = new StringBuilder();
-        while(k > 0){   
-            char[] chars = number.toCharArray();   
-            char max = '0';
-            int maxIndex = 0;   
-            if(maxIndex == chars.length - k){
-                break;
+        char[] result = new char[number.length() - k];
+        Stack<Character> stack = new Stack<>();
+
+        for (int i=0; i<number.length(); i++) {
+            char c = number.charAt(i);
+            while (!stack.isEmpty() && stack.peek() < c && k-- > 0) {
+                stack.pop();
             }
-            for(int i = 0; i <= k; i++){
-                if(chars[i] > max){
-                    max = chars[i];
-                    maxIndex = i;                    
-                }
-                if(max == '9'){
-                    break;
-                }
-            }
-            k -= maxIndex;
-            if(k == 0){
-                number = number.substring(maxIndex); 
-                answer.append(number);  
-            } else {                   
-                answer.append(chars[maxIndex]);
-                number = number.substring(maxIndex + 1); 
-            }
-            // System.out.println(chars[maxIndex]+" "+number);
+            stack.push(c);
         }
-        return answer.toString();
+        for (int i=0; i<result.length; i++) {
+            result[i] = stack.get(i);
+        }
+        return new String(result);
     }
 }
