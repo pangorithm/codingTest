@@ -1,56 +1,44 @@
 import java.util.*;
 class Solution {
-    public int[] solution(int[] sequence, int k) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        map.put(0, sequence[0]);
-        for(int i = 1; i < sequence.length; i++){
-            map.put(i, map.get(i - 1) + sequence[i]);
-        }
-        
-        HashMap<String, Integer> sumMap = new HashMap<>();   
+    public int[] solution(int[] sequence, int k) {         
         int start = 0;
         int end = 0;
+        int sum = sequence[0];
+        int minLength = sequence.length;
         
+        int[] answer = new int[2];
         while(end < sequence.length){
-            int sum = map.get(end) - map.get(start) + sequence[start];
             if(sum == k){
-                sumMap.put(start + " " + end, end - start);
+                int length = end - start;
+                if(minLength > length){
+                    minLength = length;
+                    answer[0] = start;
+                    answer[1] = end;
+                }                
+                sum -= sequence[start];
                 start++;
                 end++;
+                if(end < sequence.length){
+                    sum += sequence[end];
+                }
             } else if (sum < k){
                 if(end + 1 >= sequence.length){
                     break;
                 }
                 if(k - sum < sequence[end + 1]){
+                    sum -= sequence[start];
                     start++;
                 }
                 end++;
+                sum += sequence[end];
             } else { // sum > k
+                sum -= sequence[start];
                 start++;
                 if(start >= sequence.length){
                     break;
                 }
             }
         }
-                
-        int minLength = sequence.length;
-        int[] answer = new int[2];
-        for(String str : sumMap.keySet()){
-            int length = sumMap.get(str);
-            if(minLength > length){
-                minLength = length;
-                String[] temp = str.split(" ");
-                answer[0] = Integer.parseInt(temp[0]);
-                answer[1] = Integer.parseInt(temp[1]); 
-            } else if(minLength == length){                
-                String[] temp = str.split(" ");
-                if(answer[0] > Integer.parseInt(temp[0])){                    
-                    answer[0] = Integer.parseInt(temp[0]);
-                    answer[1] = Integer.parseInt(temp[1]); 
-                }
-            }
-        }
-        // System.out.println(sumMap);
         return answer;
     }
 }
