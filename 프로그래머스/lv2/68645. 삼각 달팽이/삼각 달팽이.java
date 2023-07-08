@@ -1,5 +1,3 @@
-import java.util.*;
-
 class Solution {
     public int[] solution(int n) {
         if(n == 1){
@@ -29,18 +27,12 @@ class Solution {
             }
         }
         
-        ArrayList<Integer> list = new ArrayList<>();
+        int[] answer = new int[(n * (n + 1)) >> 1];
+        i = 0;
         for(y = 0; y < n; y++){
-            for(x = 0; x < n; x++){
-                if(square[y][x] != 0){
-                    list.add(square[y][x]);
-                }
+            for(x = 0; x <= y; x++){
+                answer[i++] = square[y][x];
             }
-        }
-        
-        int[] answer = new int[list.size()];
-        for(i = 0; i < answer.length; i++){
-            answer[i] = list.get(i);
         }
         return answer;
     }
