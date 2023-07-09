@@ -2,12 +2,11 @@ class Solution {
     public int solution(int[] queue1, int[] queue2) {
         long sum = 0;
         long checkSum = 0;
-        int[] que = new int[queue1.length << 2];
+        int[] que = new int[queue1.length * 3];
         for(int i = 0; i < queue1.length; i++){
             que[i] = queue1[i];
             que[queue1.length + i] = queue2[i];
             que[(queue1.length << 1) + i] = queue1[i];
-            que[queue1.length * 3 + i] = queue2[i];
             sum += queue1[i] + queue2[i];            
             checkSum += queue1[i];
         }
