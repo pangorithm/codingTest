@@ -20,7 +20,7 @@ class Solution {
         
         if(warr[0] == '('){ // 3
             return u + solution(v);
-        } else {
+        } else { // 4
             char[] uarr = u.toCharArray();
             StringBuilder newU = new StringBuilder();
             for(int j = 1; j < u.length() - 1; j++){
