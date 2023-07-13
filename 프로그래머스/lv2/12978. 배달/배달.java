@@ -16,7 +16,7 @@ class Solution {
         HashMap<Integer, Integer> map = new HashMap<>();
         Stack<State> dfs = new Stack();
         
-        dfs.push(new State(1, 0, new HashSet<Integer>(1)));
+        dfs.push(new State(1, 0));
         while(dfs.size() > 0){
             if(map.size() == N){
                 return N;
@@ -31,10 +31,8 @@ class Solution {
                 }
                 int nextTime = state.time + graph[state.num][i];
                 
-                if(!state.set.contains(i) && nextTime <= map.getOrDefault(i, K)){
-                    HashSet<Integer> newSet = new HashSet<>(state.set);
-                    newSet.add(i);
-                    dfs.push(new State(i, nextTime, newSet));
+                if(nextTime <= map.getOrDefault(i, K)){
+                    dfs.push(new State(i, nextTime));
                 }
             }                       
         }
@@ -45,12 +43,10 @@ class Solution {
     class State {
         int num;
         int time;
-        HashSet<Integer> set;
         
-        State(int num, int time, HashSet<Integer> set){
+        State(int num, int time){
             this.num = num;
             this.time = time;
-            this.set = set;
         }
     }
 }
