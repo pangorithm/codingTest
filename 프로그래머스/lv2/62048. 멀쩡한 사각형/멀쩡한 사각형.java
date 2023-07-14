@@ -1,10 +1,7 @@
 class Solution {
     public long solution(int w, int h) {
         int gcd = getGCD(Math.max(w, h), Math.min(w, h));
-        long answer = (long) w * h;
-        w /= gcd;
-        h /= gcd;
-        return answer - gcd * (w + h - 1);
+        return (long) w * h - gcd * (w / gcd + h / gcd - 1);
     }
     
     int getGCD(int a, int b){        
