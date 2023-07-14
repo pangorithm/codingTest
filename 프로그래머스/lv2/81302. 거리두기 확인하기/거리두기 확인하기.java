@@ -64,6 +64,7 @@ class Solution {
                 }
             }
         }
+        seats[i][y][x] = 'O';
         return true;
     }
 }
