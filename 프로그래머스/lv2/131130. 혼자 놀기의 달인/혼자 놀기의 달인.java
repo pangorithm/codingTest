@@ -1,33 +1,20 @@
 import java.util.*;
+
 class Solution {
     public int solution(int[] cards) {
-        int answer = 0;
+        boolean[] visited = new boolean[cards.length];
+        Integer[] counts = new Integer[cards.length];
         for(int i = 0; i < cards.length; i++){
-            HashSet<Integer> set1 = new HashSet<>();
             int boxNo = i;
-            while(!set1.contains(boxNo)){
-                set1.add(boxNo);
+            int count = 0;
+            while(visited[boxNo] == false){
+                count++;
+                visited[boxNo] = true;
                 boxNo = cards[boxNo] - 1;
             }
-            if(set1.size() == cards.length){
-                continue;
-            }
-            for(int j = 0; j < cards.length; j++){
-                HashSet<Integer> set2 = new HashSet<>();
-                boxNo = j;
-                while(!set1.contains(boxNo) && !set2.contains(boxNo)){
-                set2.add(boxNo);
-                boxNo = cards[boxNo] - 1;
-                }
-                
-                int temp = set1.size() * set2.size();
-                if(temp > answer){
-                    answer = temp;
-                // System.out.println(set1);
-                // System.out.println(set2);
-                }
-            }
+            counts[i] = count;
         }
-        return answer;
+        Arrays.sort(counts, (v1, v2) -> v2 - v1);
+        return counts[0] * counts[1];
     }
 }
