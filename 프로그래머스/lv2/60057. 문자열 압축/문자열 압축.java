@@ -3,7 +3,7 @@ import java.util.*;
 class Solution {
     public int solution(String s) {
         int answer = s.length();
-        if(answer < 4){
+        if(answer < 3){
             return answer;
         }
         int length = answer;
