@@ -5,18 +5,15 @@ class Solution {
         PriorityQueue<Integer> cleared = new PriorityQueue<>((v1, v2) -> v2 - v1);
         int stage = 0;
         for(;stage < enemy.length; stage++){
-            if(enemy[stage] > n){
+            n -= enemy[stage];
+            cleared.offer(enemy[stage]);
+            if(n < 0){
                 if(k > 0){
                     k--;
-                    n -= enemy[stage];
-                    cleared.offer(enemy[stage]);
                     n += cleared.poll();
                 } else {
                     return stage;
                 }
-            } else {
-                n -= enemy[stage];
-                cleared.offer(enemy[stage]);
             }
         }
         return stage;
