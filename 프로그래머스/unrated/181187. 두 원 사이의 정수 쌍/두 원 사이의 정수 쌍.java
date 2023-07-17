@@ -13,10 +13,7 @@ class Solution {
             while(xMax > 0 && (long) y * y + (long) xMax * xMax > rr2){
                 xMax--;
             }
-            if(xMax > xMin){
-                answer += xMax - xMin;
-            }
-            // System.out.println(y+" "+xMin +" "+ xMax);
+            answer += xMax - xMin;            
         }
         return answer << 2;
     }
