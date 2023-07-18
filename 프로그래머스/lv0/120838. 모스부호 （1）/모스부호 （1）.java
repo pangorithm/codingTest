@@ -1,62 +1,30 @@
 class Solution {
     public String solution(String letter) {
-        String answer = "";
-        String[] strArr = letter.split(" ");
-        for(int i = 0; i < strArr.length; i++){
-            if(strArr[i].equals(".-")){
-                answer = answer.concat("a");
-            } else if(strArr[i].equals("-...")){
-                answer = answer.concat("b");
-            } else if(strArr[i].equals("-.-.")){
-                answer = answer.concat("c");
-            } else if(strArr[i].equals("-..")){
-                answer = answer.concat("d");
-            } else if(strArr[i].equals(".")){
-                answer = answer.concat("e");
-            } else if(strArr[i].equals("..-.")){
-                answer = answer.concat("f");
-            } else if(strArr[i].equals("--.")){
-                answer = answer.concat("g");
-            } else if(strArr[i].equals("....")){
-                answer = answer.concat("h");
-            } else if(strArr[i].equals("..")){
-                answer = answer.concat("i");
-            } else if(strArr[i].equals(".---")){
-                answer = answer.concat("j");
-            } else if(strArr[i].equals("-.-")){
-                answer = answer.concat("k");
-            } else if(strArr[i].equals(".-..")){
-                answer = answer.concat("l");
-            } else if(strArr[i].equals("--")){
-                answer = answer.concat("m");
-            } else if(strArr[i].equals("-.")){
-                answer = answer.concat("n");
-            } else if(strArr[i].equals("---")){
-                answer = answer.concat("o");
-            } else if(strArr[i].equals(".--.")){
-                answer = answer.concat("p");
-            } else if(strArr[i].equals("--.-")){
-                answer = answer.concat("q");
-            } else if(strArr[i].equals(".-.")){
-                answer = answer.concat("r");
-            } else if(strArr[i].equals("...")){
-                answer = answer.concat("s");
-            } else if(strArr[i].equals("-")){
-                answer = answer.concat("t");
-            } else if(strArr[i].equals("..-")){
-                answer = answer.concat("u");
-            } else if(strArr[i].equals("...-")){
-                answer = answer.concat("v");
-            } else if(strArr[i].equals(".--")){
-                answer = answer.concat("w");
-            } else if(strArr[i].equals("-..-")){
-                answer = answer.concat("x");
-            } else if(strArr[i].equals("-.--")){
-                answer = answer.concat("y");
-            } else if(strArr[i].equals("--..")){
-                answer = answer.concat("z");
+        String[] morse = { 
+            "'.-':'a'","'-...':'b'","'-.-.':'c'","'-..':'d'","'.':'e'","'..-.':'f'",
+            "'--.':'g'","'....':'h'","'..':'i'","'.---':'j'","'-.-':'k'","'.-..':'l'",
+            "'--':'m'","'-.':'n'","'---':'o'","'.--.':'p'","'--.-':'q'","'.-.':'r'",
+            "'...':'s'","'-':'t'","'..-':'u'","'...-':'v'","'.--':'w'","'-..-':'x'",
+            "'-.--':'y'","'--..':'z'"
+        };
+        String[][] morseArray = new String[morse.length][2];
+        for(int i = 0; i < morse.length; i++){
+            morse[i] = morse[i].replaceAll("'", "");
+            morseArray[i] = morse[i].split(":");
+        }
+        
+        StringBuilder answer = new StringBuilder();
+        
+        String[] letterArr = letter.split(" ");
+        loop : for(int i = 0; i < letterArr.length; i++){
+            for(int j = 0; j < morseArray.length; j++){
+                if(letterArr[i].equals(morseArray[j][0])){
+                    answer.append(morseArray[j][1]);
+                    continue loop;
+                }
             }
         }
-        return answer;
+        
+        return answer.toString();
     }
 }
