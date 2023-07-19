@@ -34,10 +34,7 @@ class Solution {
         set.add(new StringBuilder().append(table[0][2]).append(table[1][1]).append(table[2][0]).toString());
         
         System.out.println(set);
-        if(set.contains("OOO") && oMxCount == 0){
-            return 0;
-        }
-        if(set.contains("XXX") && oMxCount == 1){
+        if(set.contains("OOO") && oMxCount == 0 || set.contains("XXX") && oMxCount == 1){
             return 0;
         }
         
