@@ -22,32 +22,16 @@ class Solution {
         }
         
         HashSet<String> set = new HashSet<>();
-        StringBuilder str = new StringBuilder();
-        str.append(table[0][0]).append(table[0][1]).append(table[0][2]);
-        set.add(str.toString());
-        str = new StringBuilder();
-        str.append(table[1][0]).append(table[1][1]).append(table[1][2]);
-        set.add(str.toString());
-        str = new StringBuilder();
-        str.append(table[2][0]).append(table[2][1]).append(table[2][2]);
-        set.add(str.toString());
+        set.add(new StringBuilder().append(table[0][0]).append(table[0][1]).append(table[0][2]).toString());
+        set.add(new StringBuilder().append(table[1][0]).append(table[1][1]).append(table[1][2]).toString());
+        set.add(new StringBuilder().append(table[2][0]).append(table[2][1]).append(table[2][2]).toString());
         
-        str = new StringBuilder();
-        str.append(table[0][0]).append(table[1][0]).append(table[2][0]);
-        set.add(str.toString());
-        str = new StringBuilder();
-        str.append(table[0][1]).append(table[1][1]).append(table[2][1]);
-        set.add(str.toString());
-        str = new StringBuilder();
-        str.append(table[0][2]).append(table[1][2]).append(table[2][2]);
-        set.add(str.toString());
+        set.add(new StringBuilder().append(table[0][0]).append(table[1][0]).append(table[2][0]).toString());
+        set.add(new StringBuilder().append(table[0][1]).append(table[1][1]).append(table[2][1]).toString());
+        set.add(new StringBuilder().append(table[0][2]).append(table[1][2]).append(table[2][2]).toString());
         
-        str = new StringBuilder();
-        str.append(table[0][0]).append(table[1][1]).append(table[2][2]);
-        set.add(str.toString());
-        str = new StringBuilder();
-        str.append(table[0][2]).append(table[1][1]).append(table[2][0]);
-        set.add(str.toString());
+        set.add(new StringBuilder().append(table[0][0]).append(table[1][1]).append(table[2][2]).toString());
+        set.add(new StringBuilder().append(table[0][2]).append(table[1][1]).append(table[2][0]).toString());
         
         System.out.println(set);
         if(set.contains("OOO") && oMxCount == 0){
