@@ -15,7 +15,7 @@ class Solution {
 
         for (int i = 4; i <= n; i += 2) {
             cache[i] = (cache[i - 2] * 3 + ((sum << 1) + 2)) % 1000000007L;
-            sum += cache[i - 2] % 1000000007L;
+            sum += cache[i - 2];
         }
 
         return (int) cache[n];
