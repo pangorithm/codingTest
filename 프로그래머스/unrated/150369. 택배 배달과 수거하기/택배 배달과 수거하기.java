@@ -25,6 +25,9 @@ class Solution {
     
             truck = cap; // 배달할 상자 갯수
             deliveriesSum -= cap;
+            if(deliveriesSum <= 0){
+                deliveriesLastIndex = -1;
+            }
             for(int i = deliveriesLastIndex; i >= 0; i--){
                 if(deliveries[i] > 0){
                     if(deliveries[i] > truck){
@@ -35,25 +38,20 @@ class Solution {
                     } else {
                         truck -= deliveries[i];
                         deliveries[i] = 0;
-                        
-                        if(deliveriesSum <= 0){
-                            deliveriesLastIndex = -1;
-                        }
                     }
                 }
             }
             
             truck = cap; // 수거 가능 상자 갯수
-            pickupsSum -= cap;
+            pickupsSum -= cap;                        
+            if(pickupsSum <= 0){
+                pickupsLastIndex = -1;
+            }
             for(int i = pickupsLastIndex; i >= 0; i--){
                 if(pickups[i] > 0){
                     if(pickups[i] <= truck){
                         truck -= pickups[i];
                         pickups[i] = 0;
-                        
-                        if(pickupsSum <= 0){
-                            pickupsLastIndex = -1;
-                        }
                     } else {
                         pickups[i] -= truck;
                         truck = 0;
