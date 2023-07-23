@@ -35,11 +35,12 @@ class Solution {
                     } else {
                         truck -= deliveries[i];
                         deliveries[i] = 0;
+                        
+                        if(deliveriesSum <= 0){
+                            deliveriesLastIndex = -1;
+                        }
                     }
                 }
-            }
-            if(deliveriesSum <= 0){
-                deliveriesLastIndex = -1;
             }
             
             truck = cap; // 수거 가능 상자 갯수
@@ -49,6 +50,10 @@ class Solution {
                     if(pickups[i] <= truck){
                         truck -= pickups[i];
                         pickups[i] = 0;
+                        
+                        if(pickupsSum <= 0){
+                            pickupsLastIndex = -1;
+                        }
                     } else {
                         pickups[i] -= truck;
                         truck = 0;
@@ -56,9 +61,6 @@ class Solution {
                         break;
                     }
                 }
-            }
-            if(pickupsSum <= 0){
-                pickupsLastIndex = -1;
             }
             
             // System.out.println(Arrays.toString(deliveries));
