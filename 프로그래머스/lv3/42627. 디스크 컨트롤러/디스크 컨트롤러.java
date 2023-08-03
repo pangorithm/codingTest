@@ -25,9 +25,8 @@ class Solution {
             if(list.size() == 0){
                 time = jobList.get(0)[0];
             } else {
-                Integer[] minJob = new Integer[2];
-                minJob[1] = Integer.MAX_VALUE;
-                for(int i = 0; i < list.size(); i++){
+                Integer[] minJob = list.get(0);
+                for(int i = 1; i < list.size(); i++){
                     Integer[] job = list.get(i);
                     if(minJob[1] > job[1]){
                         minJob = job;
