@@ -19,87 +19,28 @@ class Solution {
             for(int i = 0; i < 4; i++){
                 int nextY = state.y;
                 int nextX = state.x;
+                int nextCost = state.cost;
+                
                 switch (i){
-                    case 0 :
-                        nextX = state.x + 1;
-                        if(nextX < board.length){
-                            if(board[state.y][nextX] != 1){
-                                if(state.dir == i){
-                                    int nextCost = state.cost + 100;
-                                    if(costBoard[state.y][nextX][i] > nextCost){
-                                        costBoard[state.y][nextX][i] = nextCost;
-                                        bfs.offer(new State(state.y, nextX, i, nextCost));
-                                    }
-                                } else {
-                                    int nextCost = state.cost + 600;
-                                    if(costBoard[state.y][nextX][i] > nextCost){
-                                        costBoard[state.y][nextX][i] = nextCost;
-                                        bfs.offer(new State(state.y, nextX, i, nextCost));
-                                    }
-                                }
-                            }
+                    case 0 : nextX = state.x + 1; break;
+                    case 1 : nextY = state.y + 1; break;
+                    case 2 : nextX = state.x - 1; break;
+                    case 3 : nextY = state.y - 1; break;
+                }
+                
+                if(nextY >= 0 && nextY < board.length && nextX >= 0 && nextX < board.length){
+                    if(board[nextY][nextX] != 1){
+                        if(state.dir == i){
+                            nextCost += 100;
+                        } else {
+                            nextCost += 600;                            
                         }
-                        break;
-                    case 1 :
-                        nextY = state.y + 1;
-                        if(nextY < board.length){
-                            if(board[nextY][state.x] != 1){
-                                if(state.dir == i){
-                                    int nextCost = state.cost + 100;
-                                    if(costBoard[nextY][state.x][i] > nextCost){
-                                        costBoard[nextY][state.x][i] = nextCost;
-                                        bfs.offer(new State(nextY, state.x, i, nextCost));
-                                    }
-                                } else {
-                                    int nextCost = state.cost + 600;
-                                    if(costBoard[nextY][state.x][i] > nextCost){
-                                        costBoard[nextY][state.x][i] = nextCost;
-                                        bfs.offer(new State(nextY, state.x, i, nextCost));
-                                    }
-                                }
-                            }
+                        
+                        if(costBoard[nextY][nextX][i] > nextCost){
+                            costBoard[nextY][nextX][i] = nextCost;
+                            bfs.offer(new State(nextY, nextX, i, nextCost));
                         }
-                        break;
-                    case 2 :
-                        nextX = state.x - 1;
-                        if(nextX >= 0){
-                            if(board[state.y][nextX] != 1){
-                                if(state.dir == i){
-                                    int nextCost = state.cost + 100;
-                                    if(costBoard[state.y][nextX][i] > nextCost){
-                                        costBoard[state.y][nextX][i] = nextCost;
-                                        bfs.offer(new State(state.y, nextX, i, nextCost));
-                                    }
-                                } else {
-                                    int nextCost = state.cost + 600;
-                                    if(costBoard[state.y][nextX][i] > nextCost){
-                                        costBoard[state.y][nextX][i] = nextCost;
-                                        bfs.offer(new State(state.y, nextX, i, nextCost));
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    case 3 :
-                        nextY = state.y - 1;
-                        if(nextY >= 0){
-                            if(board[nextY][state.x] != 1){
-                                if(state.dir == i){
-                                    int nextCost = state.cost + 100;
-                                    if(costBoard[nextY][state.x][i] > nextCost){
-                                        costBoard[nextY][state.x][i] = nextCost;
-                                        bfs.offer(new State(nextY, state.x, i, nextCost));
-                                    }
-                                } else {
-                                    int nextCost = state.cost + 600;
-                                    if(costBoard[nextY][state.x][i] > nextCost){
-                                        costBoard[nextY][state.x][i] = nextCost;
-                                        bfs.offer(new State(nextY, state.x, i, nextCost));
-                                    }
-                                }
-                            }
-                        }
-                        break;
+                    }
                 }
             }
         }
