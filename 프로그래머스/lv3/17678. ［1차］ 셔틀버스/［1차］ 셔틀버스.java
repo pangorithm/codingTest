@@ -1,24 +1,11 @@
 import java.util.*;
 
 class Solution {
-    HashMap<String, Integer> timeMap;
-        
     public String solution(int n, int t, int m, String[] timetable) {
-        int maxCrewCount = n * m;
-        String lastTime = String.format("%02d:%02d", 9 + ((n - 1) * t) / 60, ((n - 1) * t) % 60);
-        // System.out.println(lastTime);
-        
-        timeMap = new HashMap<String, Integer>();
-        for(String time : timetable){
-            if(time.compareTo(lastTime) <= 0){
-                timeMap.put(time, timeMap.getOrDefault(time, 0) + 1);
-            }
-        }
-        // System.out.println(timeMap);
-        
+        String lastTime = String.format("%02d:%02d", 9 + ((n - 1) * t) / 60, ((n - 1) * t) % 60);        
         String answer = lastTime;
         
-        ArrayList<String> timeList = new ArrayList<>(timeMap.keySet());
+        ArrayList<String> timeList = new ArrayList<>(Arrays.asList(timetable));
         Collections.sort(timeList);
         
         for(int i = 0; i < n; i++){
@@ -32,7 +19,7 @@ class Solution {
                 }
                 // System.out.println(timeList.get(0)+" "+timeMap.get(timeList.get(0)));
                 
-                count += timeMap.get(timeList.get(0));
+                count ++;
                 
                 if(i == n - 1 && count >= m){
                     String[] hnm = timeList.get(0).split(":");
@@ -49,7 +36,6 @@ class Solution {
                 if(count <= m){
                     timeList.remove(0);
                 } else {
-                    timeMap.put(timeList.get(0), count - m);
                     break;
                 }
             }
