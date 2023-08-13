@@ -34,7 +34,7 @@ class Solution {
                 ArrayList<Integer> list = loadList[state.loc];
                 int length = list.size();
                 for(int i = 0; i < length; i++){
-                    if(dp[list.get(i)] > state.dst && state.dst < n){
+                    if(dp[list.get(i)] > state.dst){
                         dp[list.get(i)] = state.dst;
                         bfs.offer(new State(list.get(i), state.dst + 1));
                     }
