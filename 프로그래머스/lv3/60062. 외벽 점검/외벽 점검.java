@@ -23,7 +23,8 @@ class Solution {
             for(int i = 0; i < weak.length; i++){
                 if(!state.weakState[i]){
                     boolean[] nextWeakState = Arrays.copyOf(state.weakState, weak.length);
-                    for(int j = i; dumpWeak[j] <= weak[i] + sortedDist[state.dept]; j++){
+                    int endMove = weak[i] + sortedDist[state.dept];
+                    for(int j = i; dumpWeak[j] <= endMove; j++){
                         nextWeakState[j % weak.length] = true;
                     }
                                     
@@ -34,12 +35,14 @@ class Solution {
                             break;
                         }
                     }
+                    
+                    int nextDept = state.dept + 1;
                     if(checkedAll){
-                        return state.dept + 1;
+                        return nextDept;
                     } 
                         
-                    if(state.dept + 1 < dist.length){
-                        bfs.offer(new State(nextWeakState, state.dept + 1));
+                    if(nextDept < dist.length){
+                        bfs.offer(new State(nextWeakState, nextDept));
                     }
                 }
             }
