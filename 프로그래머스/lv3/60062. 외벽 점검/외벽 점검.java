@@ -1,8 +1,6 @@
 import java.util.*;
 
 class Solution {
-    static int answer = -1;
-    
     public int solution(int n, int[] weak, int[] dist) {
         int[] dumpWeak = new int[weak.length << 1];
         for(int i = 0; i < weak.length; i++){
@@ -28,11 +26,9 @@ class Solution {
                     for(int j = i; dumpWeak[j] <= weak[i] + sortedDist[state.dept]; j++){
                         nextWeakState[j % weak.length] = true;
                     }
-                    // System.out.println(Arrays.toString(nextWeakState)+" "+(state.dept + 1));
                                     
                     boolean checkedAll = true;
                     for(boolean b : nextWeakState){
-                        // System.out.println(Arrays.toString(state.weakState));
                         if(!b){
                             checkedAll = false;
                             break;
@@ -47,10 +43,9 @@ class Solution {
                     }
                 }
             }
-
         }
         
-        return answer;
+        return -1;
     }
     
     class State{
