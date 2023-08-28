@@ -8,6 +8,18 @@ public class Main {
   static StringBuilder answer = new StringBuilder();
 
   public static void main(String[] args) throws IOException {
+
+
+    /////////////////////////
+    System.out.print(answer);
+    in.close();
+  }
+}
+
+/*
+    // 한 라인에 하나의 변수가 있을 경우
+    int n = Integer.parseInt(in.readLine());
+
     // 한 라인에 여러 입력이 있을 경우
     StringTokenizer st = new StringTokenizer(in.readLine());
 
@@ -18,10 +30,4 @@ public class Main {
       int n = Integer.parseInt(str);
       answer.append(n).append("\n");
     }
-
-    /////////////////////////
-    System.out.print(answer);
-    bw.close();
-    br.close();
-  }
-}
+*/
