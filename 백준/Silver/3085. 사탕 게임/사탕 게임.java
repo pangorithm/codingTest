@@ -19,39 +19,48 @@ public class Main {
 
     int max = 0;
     char temp = board[1][1];
-    board[1][1] = board[1][2];
-    board[1][2] = temp;
-    int count = check();
-    if (max < count) {
-      max = count;
+    int count = 0;
+    if (temp != board[1][2]) {
+      board[1][1] = board[1][2];
+      board[1][2] = temp;
+      count = check();
+      if (max < count) {
+        max = count;
+      }
+      board[1][2] = board[1][1];
     }
-    board[1][2] = board[1][1];
-    board[1][1] = board[2][1];
-    board[2][1] = temp;
-    count = check();
-    if (max < count) {
-      max = count;
+    if (temp != board[2][1]) {
+      board[1][1] = board[2][1];
+      board[2][1] = temp;
+      count = check();
+      if (max < count) {
+        max = count;
+      }
+      board[2][1] = board[1][1];
     }
-    board[2][1] = board[1][1];
     board[1][1] = temp;
 
     for (int i = 2; i <= n; i++) {
       for (int j = 2; j <= n; j++) {
         temp = board[i][j];
-        board[i][j] = board[i - 1][j];
-        board[i - 1][j] = temp;
-        count = check();
-        if (max < count) {
-          max = count;
+        if (temp != board[i - 1][j]) {
+          board[i][j] = board[i - 1][j];
+          board[i - 1][j] = temp;
+          count = check();
+          if (max < count) {
+            max = count;
+          }
+          board[i - 1][j] = board[i][j];
         }
-        board[i - 1][j] = board[i][j];
-        board[i][j] = board[i][j - 1];
-        board[i][j - 1] = temp;
-        count = check();
-        if (max < count) {
-          max = count;
+        if (temp != board[i][j - 1]) {
+          board[i][j] = board[i][j - 1];
+          board[i][j - 1] = temp;
+          count = check();
+          if (max < count) {
+            max = count;
+          }
+          board[i][j - 1] = board[i][j];
         }
-        board[i][j - 1] = board[i][j];
         board[i][j] = temp;
       }
     }
