@@ -24,22 +24,22 @@ public class Main {
       for (int aj = 0; aj < w; aj++) {
         maxI = Math.min(h, ai + 2);
         maxJ = Math.min(w, aj + 2);
-        for (int bi = Math.max(0, ai - 1); bi < maxI; bi++) {
+        for (int bi = ai; bi < maxI; bi++) {
           for (int bj = Math.max(0, aj - 1); bj < maxJ; bj++) {
             if ((ai == bi && aj == bj) || (Math.abs(bi - ai) + Math.abs(bj - aj) != 1)) {
               continue;
             }
             maxI = Math.min(h, ai + 3);
             maxJ = Math.min(w, aj + 3);
-            for (int ci = Math.max(0, ai - 2); ci < maxI; ci++) {
+            for (int ci = ai; ci < maxI; ci++) {
               for (int cj = Math.max(0, aj - 2); cj < maxJ; cj++) {
                 if ((ai == ci && aj == cj) || (bi == ci && bj == cj) || (Math.abs(ci - bi) + Math.abs(cj - bj) != 1)) {
                   continue;
                 }
                 maxI = Math.min(h, ai + 4);
                 maxJ = Math.min(w, aj + 4);
-                for (int di = Math.max(0, ai - 3); di < maxI; di++) {
-                  for (int dj = Math.max(0, aj - 3); dj < maxJ; dj++) {
+                for (int di = ai; di < maxI; di++) {
+                  for (int dj = Math.max(0, aj - 2); dj < maxJ; dj++) {
                     if ((ai == di && aj == dj) || (bi == di && bj == dj) || (ci == di && cj == dj)
                         || ((Math.abs(di - bi) + Math.abs(dj - bj) != 1)
                             && (Math.abs(di - ci) + Math.abs(dj - cj) != 1))) {
