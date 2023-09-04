@@ -72,8 +72,10 @@ public class Main {
   }
 
   static void dfs(int boardState, int sum, int startIndex) {
-    if (boardState == maxState && max < sum) {
-      max = sum;
+    if (boardState == maxState) {
+      if (max < sum) {
+        max = sum;
+      }
     } else {
       for (int i = startIndex; i < entryArr.length; i++) {
         int state = (int) entryArr[i].getKey();
