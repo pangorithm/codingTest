@@ -11,13 +11,30 @@ public class Main {
     Arrays.fill(dp, Integer.MAX_VALUE);
     dp[1] = 0;
 
-    for (int i = 1; i < X; i++) {
-      if (i * 3 <= X && dp[i * 3] > dp[i]) {
+    int last = X / 3;
+    for (int i = 1; i <= last; i++) {
+      if (dp[i * 3] > dp[i]) {
         dp[i * 3] = dp[i] + 1;
       }
-      if ((i << 1) <= X && dp[i << 1] > dp[i]) {
+      if (dp[i << 1] > dp[i]) {
         dp[i << 1] = dp[i] + 1;
       }
+      if (dp[i + 1] > dp[i]) {
+        dp[i + 1] = dp[i] + 1;
+      }
+    }
+
+    last = X >> 1;
+    for (int i = X / 3 + 1; i <= last; i++) {
+      if (dp[i << 1] > dp[i]) {
+        dp[i << 1] = dp[i] + 1;
+      }
+      if (dp[i + 1] > dp[i]) {
+        dp[i + 1] = dp[i] + 1;
+      }
+    }
+
+    for (int i = (X >> 1) + 1; i < X; i++) {
       if (dp[i + 1] > dp[i]) {
         dp[i + 1] = dp[i] + 1;
       }
