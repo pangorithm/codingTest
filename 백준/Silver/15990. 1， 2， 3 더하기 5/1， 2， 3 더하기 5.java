@@ -16,7 +16,7 @@ public class Main {
       }
     }
 
-    long[][] dp = new long[max + 3][3];
+    int[][] dp = new int[max + 3][3];
     dp[1][0] = 1; // 1
     dp[2][1] = 1; // 2
     dp[3][2] = 1; // 3
@@ -29,7 +29,8 @@ public class Main {
 
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < T; i++) {
-      sb.append((dp[inputs[i]][0] + dp[inputs[i]][1] + dp[inputs[i]][2]) % 1_000_000_009).append("\n");
+      sb.append(((dp[inputs[i]][0] + dp[inputs[i]][1]) % 1_000_000_009 + dp[inputs[i]][2]) % 1_000_000_009)
+          .append("\n");
     }
 
     System.out.println(sb);
