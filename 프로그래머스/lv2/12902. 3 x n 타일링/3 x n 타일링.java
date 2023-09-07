@@ -2,13 +2,7 @@
 // 4f(n-2) - f(n-4)
 
 class Solution {
-    static long[] dp;
-    
     public int solution(int n) {
-        if ((n & 1) == 1) {
-            return 0;
-        }
-
         long[] cache = new long[n + 1];
         cache[2] = 3;
         long sum = 0;
