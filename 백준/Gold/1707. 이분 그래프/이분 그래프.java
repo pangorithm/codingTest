@@ -26,7 +26,6 @@ public class Main {
         graph[b].add(a);
       }
 
-      boolean[] isVisited = new boolean[v + 1];
       int[] contains = new int[v + 1];
       Queue<Integer> bfs = new ArrayDeque<>();
       for (int startVertex = 1; startVertex <= v; startVertex++) {
@@ -39,14 +38,10 @@ public class Main {
 
         while (bfs.size() > 0) {
           int vertex = bfs.poll();
-          isVisited[vertex] = true;
 
           for (int nextVertex : graph[vertex]) {
-            if (!isVisited[nextVertex]) {
-              bfs.offer(nextVertex);
-            }
-
             if (contains[nextVertex] == 0) {
+              bfs.offer(nextVertex);
               if (contains[vertex] == 1) {
                 contains[nextVertex] = 2;
               } else {
