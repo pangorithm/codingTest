@@ -35,7 +35,7 @@ class Solution {
             
             while(!endNodeStack.empty()){
                 Integer node = endNodeStack.pop();
-                Integer nextNode = lists[node].toArray(new Integer[1])[0];
+                Integer nextNode = lists[node].iterator().next();
                 lists[node].clear();
 
                 if(v[node] != 0){
