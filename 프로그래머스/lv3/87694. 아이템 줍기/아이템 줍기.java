@@ -67,10 +67,10 @@ class Solution {
                     state.m = new int[] {state.m[1], -state.m[0]};
                 }
             }
-            state.y += state.m[0];
-            state.x += state.m[1];
+            state.y += state.m[0] << 1;
+            state.x += state.m[1] << 1;
             if(state.y == itemY && state.x == itemX){
-                return state.c >> 1;
+                return state.c;
             } else {
                 bfs.offer(state);
             }
