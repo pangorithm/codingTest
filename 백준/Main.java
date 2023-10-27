@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-  static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+  static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
   public static void main(String[] args) throws IOException {
 
@@ -13,26 +13,26 @@ public class Main {
     sb.append("test");
     System.out.println(sb);
 
-    in.close();
+    br.close();
   }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 private class MemoForMe {
-  static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+  static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
   static StringBuilder sb = new StringBuilder(); // 긴 결과 제출 시 시용할것
 
   public static void memo(String[] args) throws IOException {
 
     // 한 라인에 하나의 변수가 있을 경우
-    int n = Integer.parseInt(in.readLine());
+    int n = Integer.parseInt(br.readLine());
 
     // 한 라인에 여러 입력이 있을 경우
-    StringTokenizer st = new StringTokenizer(in.readLine());
+    StringTokenizer st = new StringTokenizer(br.readLine());
 
     // 계속해서 라인으로 입력을 받을 경우
     String str;
-    while ((str = in.readLine()) != null) {
+    while ((str = br.readLine()) != null) {
       if (str.length() == 0) {
         break;
       } // 백준에서는 파일 입력이므로 불필요한 코드. 제출 시 주석처리 할 것
