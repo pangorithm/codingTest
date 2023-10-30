@@ -17,38 +17,39 @@ public class Main {
       V[i] = Integer.parseInt(st.nextToken());
     }
 
-    int[] dp = new int[M + 1];
-    Arrays.fill(dp, -1);
-    dp[S] = 0;
-    for (int i = 0; i < N; i++) {
-      Stack<Integer> stack = new Stack<>();
-      for (int j = 0; j <= M; j++) {
-        if (dp[j] == i) {
-          if (j + V[i] <= M) {
-            stack.push(j + V[i]);
-          }
-          if (j - V[i] >= 0) {
-            stack.push(j - V[i]);
-          }
+    ArrayList<Integer> list = new ArrayList<>();
+    Queue<int[]> bfs = new ArrayDeque<>(); // {index, volume}
+    bfs.offer(new int[] { 0, S });
+    int index = 0;
+    boolean[] visited = new boolean[M + 1];
+    while (bfs.size() > 0) {
+      int[] state = bfs.poll();
+      if (index != state[0]) {
+        index = state[0];
+        visited = new boolean[M + 1];
+      }
+      if (state[0] < N) {
+        int volume = state[1] + V[state[0]];
+        if (volume <= M && !visited[volume]) {
+          bfs.offer(new int[] { state[0] + 1, volume });
+          visited[volume] = true;
         }
-      }
-      if (stack.empty()) {
-        System.out.println(-1);
-        return;
-      }
-      while (!stack.empty()) {
-        dp[stack.pop()] = i + 1;
+        volume = state[1] - V[state[0]];
+        if (volume >= 0 && !visited[volume]) {
+          bfs.offer(new int[] { state[0] + 1, volume });
+          visited[volume] = true;
+        }
+      } else {
+        list.add(state[1]);
       }
     }
 
     int max = -1;
-    for (int i = M; i >= 0; i--) {
-      if (dp[i] == N) {
-        max = i;
-        break;
+    for (int v : list) {
+      if (max < v) {
+        max = v;
       }
     }
-
     System.out.println(max);
     br.close();
   }
