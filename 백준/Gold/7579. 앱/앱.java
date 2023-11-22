@@ -15,15 +15,18 @@ public class Main {
     for (int i = 0; i < N; i++) {
       apps[i][0] = Integer.parseInt(st.nextToken());
     }
+
+    int costSum = 0;
     st = new StringTokenizer(br.readLine());
     for (int i = 0; i < N; i++) {
       apps[i][1] = Integer.parseInt(st.nextToken());
+      costSum += apps[i][1];
     }
 
-    int[] dp = new int[10001];
+    int[] dp = new int[costSum + 1];
     dp[0] = 0;
     for (int[] app : apps) {
-      for (int c = 10000; c >= app[1]; c--) {
+      for (int c = costSum; c >= app[1]; c--) {
         int memory = dp[c - app[1]] + app[0];
         if (dp[c] < memory) {
           dp[c] = memory;
