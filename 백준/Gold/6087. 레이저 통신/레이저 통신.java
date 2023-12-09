@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Main {
   static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-  static int[][] moves = { { 1, 0, 0 }, { 0, 1, 1 }, { -1, 0, 2 }, { 0, -1, 3 } };
+  static int[][] moves = { { 1, 0, 0 }, { 0, 1, 1 }, { -1, 0, 0 }, { 0, -1, 1 } };
   static final int MAX_VALUE = 10_000;
 
   public static void main(String[] args) throws IOException {
@@ -21,7 +21,7 @@ public class Main {
         }
       }
     }
-    int[][][] visit = new int[H][W][4];
+    int[][][] visit = new int[H][W][2];
     for (int i = 0; i < H; i++) {
       for (int j = 0; j < W; j++) {
         Arrays.fill(visit[i][j], MAX_VALUE);
@@ -31,7 +31,7 @@ public class Main {
     int[] start = cList.get(0);
     int[] end = cList.get(1);
     Queue<int[]> bfs = new ArrayDeque<>(); // {y, x, 방향, 사용한 거울 갯수}
-    for (int dir = 0; dir < 4; dir++) {
+    for (int dir = 0; dir < 2; dir++) {
       bfs.offer(new int[] { start[0], start[1], dir, 0 });
       visit[start[0]][start[1]][dir] = 0;
     }
@@ -51,12 +51,7 @@ public class Main {
       }
     }
 
-    int min = MAX_VALUE;
-    for (int v : visit[end[0]][end[1]]) {
-      min = Math.min(min, v);
-    }
-
-    System.out.println(min);
+    System.out.println(Math.min(visit[end[0]][end[1]][0], visit[end[0]][end[1]][1]));
     br.close();
   }
 }
