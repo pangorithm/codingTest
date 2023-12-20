@@ -36,9 +36,11 @@ public class Main {
     int maxWeight = minEdge[2];
 
     Queue<int[]> edgePQ = new PriorityQueue<>((e1, e2) -> (e1[2] - e2[2]));
+    graph[minEdge[0]].remove(minEdge);
     for (int[] e : graph[minEdge[0]]) {
       edgePQ.offer(e);
     }
+    graph[minEdge[1]].remove(minEdge);
     for (int[] e : graph[minEdge[1]]) {
       edgePQ.offer(e);
     }
@@ -53,6 +55,7 @@ public class Main {
             if (maxWeight < edge[2]) {
               maxWeight = edge[2];
             }
+            graph[edge[1]].remove(edge);
             for (int[] newEdge : graph[edge[1]]) {
               edgePQ.offer(newEdge);
             }
@@ -64,6 +67,7 @@ public class Main {
           if (maxWeight < edge[2]) {
             maxWeight = edge[2];
           }
+          graph[edge[0]].remove(edge);
           for (int[] newEdge : graph[edge[0]]) {
             edgePQ.offer(newEdge);
           }
