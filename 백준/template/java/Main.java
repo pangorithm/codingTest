@@ -1,4 +1,4 @@
-package coding.algorithm.baekjoon;
+package coding.algorithm.baekjoon.template.java;
 
 //////////////////////////////////
 import java.io.*;
