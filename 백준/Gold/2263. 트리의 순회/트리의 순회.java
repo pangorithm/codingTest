@@ -5,7 +5,6 @@ public class Main {
   static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
   static int[] inOrder;
   static int[] postOrder;
-  static int[] parent;
   static int[] leftChild;
   static int[] rightChild;
   static StringBuilder sb = new StringBuilder();
@@ -45,10 +44,9 @@ public class Main {
         }
       }
 
-      leftChild[root] = makeTree(inStart, rootIndexByInOrder - 1,
-          postStart, postStart + (rootIndexByInOrder - inStart) - 1);
-      rightChild[root] = makeTree(rootIndexByInOrder + 1, inEnd,
-          postStart + (rootIndexByInOrder - inStart), postEnd - 1);
+      int leftTreeSize = rootIndexByInOrder - inStart;
+      leftChild[root] = makeTree(inStart, rootIndexByInOrder - 1, postStart, postStart + leftTreeSize - 1);
+      rightChild[root] = makeTree(rootIndexByInOrder + 1, inEnd, postStart + leftTreeSize, postEnd - 1);
 
       return root;
     }
