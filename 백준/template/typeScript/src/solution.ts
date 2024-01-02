@@ -8,10 +8,8 @@ const input: string[][] =
         .split('\n')
         .map((ln) => ln.trim().split(' '))
     : fs
-        .readFileSync('./src/myTest.txt')
+        .readFileSync(__dirname + '/myTest.txt')
         .toString()
         .trim()
         .split('\n')
         .map((ln) => ln.trim().split(' '));
-
-console.log(input);
