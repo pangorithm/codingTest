@@ -27,11 +27,8 @@ for (let t = 1; t <= T; t++) {
     if (leftDistance >= move * 2) {
       leftDistance -= move * 2;
       count += 2;
-    } else if (leftDistance > move) {
-      leftDistance -= move;
-      count++;
     } else {
-      leftDistance = 0;
+      leftDistance -= move;
       count++;
     }
 
