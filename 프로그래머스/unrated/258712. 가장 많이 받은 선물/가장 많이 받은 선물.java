@@ -18,10 +18,12 @@ class Solution {
         }
         
         int[] giftPoint = new int[friends.length];
-        for(int from = 0; from < n; from++){
-            for(int to = 0; to < n; to++){
-                giftPoint[from] += board[from][to];
-                giftPoint[to] -= board[from][to];
+        for(int a = 0; a < n; a++){
+            for(int b = a + 1; b < n; b++){
+                giftPoint[a] += board[a][b];
+                giftPoint[a] -= board[b][a];
+                giftPoint[b] += board[b][a];
+                giftPoint[b] -= board[a][b];
             }
         }
         
