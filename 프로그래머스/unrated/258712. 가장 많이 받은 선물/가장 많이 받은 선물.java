@@ -2,30 +2,29 @@ import java.util.*;
 
 class Solution {
     public int solution(String[] friends, String[] gifts) {
-        
+
         int n = friends.length;
         HashMap<String, Integer> indexMap = new HashMap<>();
         for(int i = 0; i < n; i++){
             indexMap.put(friends[i], i);
         }
-        
+
         int[][] board = new int[n][n];
         for(String str : gifts){
-            String[] gift = str.split(" ");
-            int aIndex = indexMap.get(gift[0]);
-            int bIndex = indexMap.get(gift[1]);
+            StringTokenizer st = new StringTokenizer(str);
+            int aIndex = indexMap.get(st.nextToken());
+            int bIndex = indexMap.get(st.nextToken());
             board[aIndex][bIndex]++;
         }
-        
+
         int[] giftPoint = new int[friends.length];
-        for(int a = 0; a < n; a++){
-            for(int b = a + 1; b < n; b++){
-                int point = board[a][b] - board[b][a];
-                giftPoint[a] += point;
-                giftPoint[b] -= point;
+        for(int from = 0; from < n; from++){
+            for(int to = 0; to < n; to++){
+                giftPoint[from] += board[from][to];
+                giftPoint[to] -= board[from][to];
             }
         }
-        
+
         int[] nextGifts = new int[n];
         for(int a = 0; a < n; a++){
             for(int b = a + 1; b < n; b++){
@@ -42,7 +41,7 @@ class Solution {
                 }
             }
         }
-        
+
         int max = 0;
         for(int ng : nextGifts){
             if(max < ng){
