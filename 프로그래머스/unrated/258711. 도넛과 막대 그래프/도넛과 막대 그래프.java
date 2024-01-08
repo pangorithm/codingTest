@@ -20,11 +20,10 @@ class Solution {
                 break;
             }
         }
+        
         for(int startNode : graph[answer[0]]){
             inCounts[startNode]--;
-        }
-
-        for(int startNode : graph[answer[0]]){
+            
             int outCount = graph[startNode].size();
             if(outCount == 0){
                 answer[2]++;
