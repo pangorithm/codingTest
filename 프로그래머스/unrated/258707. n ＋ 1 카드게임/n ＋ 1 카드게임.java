@@ -6,9 +6,9 @@ class Solution {
         Set<Integer> handsCardSet = new TreeSet<>();
         Set<Integer> dumpCardSet = new TreeSet<>();
         
-        int quarterN = cards.length / 3;
+        int thirdN = cards.length / 3;
         int index = 0;
-        while(index < quarterN){
+        while(index < thirdN){
             handsCardSet.add(cards[index++]);
         }
         
