@@ -1,9 +1,10 @@
 import java.util.*;
 
 class Solution {
-    int[] group = new int[2602];
-    List<Integer>[] subgroupLists = new ArrayList[2602];
-    String[] groupValues = new String[2602];
+    int length = 51 * 51;
+    int[] group = new int[length];
+    List<Integer>[] subgroupLists = new ArrayList[length];
+    String[] groupValues = new String[length];
     Map<String, HashSet<Integer>> valueGroupSetMap = new HashMap<>();
     List<String> printList = new ArrayList<>();
     
@@ -11,7 +12,7 @@ class Solution {
         int r = 0;
         int c = 0;
         String value = "EMPTY";
-        for(int i = 0; i < 2602; i++){
+        for(int i = 0; i < length; i++){
             group[i] = i;
             subgroupLists[i] = new ArrayList<>();
         }
@@ -57,20 +58,8 @@ class Solution {
                     int c1 = Integer.parseInt(st.nextToken());
                     int r2 = Integer.parseInt(st.nextToken());
                     int c2 = Integer.parseInt(st.nextToken());
-                    int group1 = find(getGroupByRC(r1, c1));
-                    int group2 = find(getGroupByRC(r2, c2));
-                    if(group1 == group2){
-                        continue;
-                    }
                     
-                    if(groupValues[group1] == null && groupValues[group2] != null){
-                        union(group2, group1);
-                    } else {
-                        if(groupValues[group2] != null){
-                            valueGroupSetMap.get(groupValues[group2]).remove(group2);
-                        }
-                        union(group1, group2);
-                    }
+                    union(getGroupByRC(r1, c1), getGroupByRC(r2, c2));
                     
                     break;
                     
@@ -110,9 +99,27 @@ class Solution {
         }
     }
     
-    void union(int a, int b){
-        subgroupLists[a].add(b);
-        group[b] = a;
+    boolean union(int group1, int group2){
+        
+        group1 = find(group1);
+        group2 = find(group2);
+        
+        if(group1 == group2){
+            return false;
+        }
+        
+        if(groupValues[group1] == null && groupValues[group2] != null){
+            subgroupLists[group2].add(group1);
+            group[group1] = group2;
+        } else {
+            if(groupValues[group2] != null){
+                valueGroupSetMap.get(groupValues[group2]).remove(group2);
+            }
+            subgroupLists[group1].add(group2);
+            group[group2] = group1;
+        }
+        
+        return true;
     }
     
     void division(int pNode){
