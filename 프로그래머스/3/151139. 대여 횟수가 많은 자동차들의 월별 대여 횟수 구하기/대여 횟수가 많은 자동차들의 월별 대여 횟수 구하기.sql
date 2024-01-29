@@ -9,5 +9,4 @@ where START_DATE >= '20220801' and START_DATE < '20221101' and CAR_ID in (
     having count(CAR_ID) >= 5
 )
 group by month, car_id
-having count(car_id) > 0
 order by month asc, car_id desc
