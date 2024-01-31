@@ -6,7 +6,7 @@ from (
     ) as c 
     join (
     select * from CAR_RENTAL_COMPANY_DISCOUNT_PLAN
-    where DURATION_TYPE = '30일 이상'
+    where DURATION_TYPE = '30일 이상' and CAR_TYPE regexp('세단|SUV')
     ) as p on c.CAR_TYPE = p.CAR_TYPE
 where car_id not in (
     select car_id from CAR_RENTAL_COMPANY_RENTAL_HISTORY
