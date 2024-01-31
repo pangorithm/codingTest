@@ -10,7 +10,7 @@ from (
     ) as p on c.CAR_TYPE = p.CAR_TYPE
 where car_id not in (
     select car_id from CAR_RENTAL_COMPANY_RENTAL_HISTORY
-    where (START_DATE < 20221130) and (END_DATE > 20221101)
+    where (START_DATE <= 20221130) and (END_DATE >= 20221101)
 )
 group by c.car_id
 having fee between 500000 and 1999999
