@@ -13,7 +13,13 @@ fn main() {
 
     for _ in 0..t {
         let cmd = input.next().unwrap();
-        let length: i32 = input.next().unwrap().parse::<i32>().unwrap();
+        let length: usize = input.next().unwrap().parse::<usize>().unwrap();
+
+        let mut str = "";
+        if length < cmd.chars().filter(|&c| c == 'D').count() {
+            str = "error";
+        }
+
         let mut dq: VecDeque<i32> = input
             .next()
             .unwrap()
@@ -23,17 +29,11 @@ fn main() {
             .flat_map(|s| s.parse::<i32>().ok())
             .collect();
 
-        let mut str = "";
-
         let mut is_reverse = false;
         for char in cmd.chars() {
             match char {
                 'R' => is_reverse = !is_reverse,
                 'D' => {
-                    if dq.is_empty() {
-                        str = "error";
-                        break;
-                    }
                     if is_reverse {
                         let _ = dq.pop_back();
                     } else {
@@ -53,7 +53,6 @@ fn main() {
                 output,
                 "[{}]",
                 dq.iter()
-                    .cloned()
                     .map(|n| n.to_string())
                     .collect::<Vec<String>>()
                     .join(",")
