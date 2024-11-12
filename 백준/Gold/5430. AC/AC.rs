@@ -15,9 +15,10 @@ fn main() {
         let cmd = input.next().unwrap();
         let length: usize = input.next().unwrap().parse::<usize>().unwrap();
 
-        let mut str = "";
         if length < cmd.chars().filter(|&c| c == 'D').count() {
-            str = "error";
+            writeln!(output, "{}", "error").unwrap();
+            input.next().unwrap();
+            continue;
         }
 
         let mut dq: VecDeque<i32> = input
@@ -30,6 +31,7 @@ fn main() {
             .collect();
 
         let mut is_reverse = false;
+
         for char in cmd.chars() {
             match char {
                 'R' => is_reverse = !is_reverse,
@@ -48,19 +50,15 @@ fn main() {
             dq.make_contiguous().reverse();
         }
 
-        if str == "" {
-            writeln!(
-                output,
-                "[{}]",
-                dq.iter()
-                    .map(|n| n.to_string())
-                    .collect::<Vec<String>>()
-                    .join(",")
-            )
-            .unwrap();
-        } else {
-            writeln!(output, "{}", str).unwrap();
-        }
+        writeln!(
+            output,
+            "[{}]",
+            dq.iter()
+                .map(|n| n.to_string())
+                .collect::<Vec<String>>()
+                .join(",")
+        )
+        .unwrap();
     }
 
     println!("{}", output);
