@@ -10,33 +10,19 @@ fn main() {
 
     let t = input.next().unwrap().parse::<u32>().unwrap();
 
-    let mut fibonacci_arr: [[usize; 3]; 41] = [[0; 3]; 41];
+    let mut fibonacci_arr: [[usize; 2]; 41] = [[0; 2]; 41];
     fibonacci_arr[0][0] = 1;
     fibonacci_arr[1][1] = 1;
 
+    for i in 2..41 {
+        fibonacci_arr[i][0] = fibonacci_arr[i - 1][0] + fibonacci_arr[i - 2][0];
+        fibonacci_arr[i][1] = fibonacci_arr[i - 1][1] + fibonacci_arr[i - 2][1];
+    }
+
     for _ in 0..t {
         let n = input.next().unwrap().parse::<usize>().unwrap();
-        fibonacci(n, &mut fibonacci_arr);
         write!(output, "{} {}\n", fibonacci_arr[n][0], fibonacci_arr[n][1]).unwrap();
     }
 
     println!("{}", output);
-}
-
-fn fibonacci(n: usize, fibonacci_arr: &mut [[usize; 3]; 41]) -> usize {
-    match n {
-        0 => 0,
-        1 => 1,
-        _ => {
-            if fibonacci_arr[n][2] == 0 {
-                fibonacci_arr[n][2] =
-                    fibonacci(n - 1, fibonacci_arr) + fibonacci(n - 2, fibonacci_arr);
-
-                fibonacci_arr[n][0] = fibonacci_arr[n - 1][0] + fibonacci_arr[n - 2][0];
-                fibonacci_arr[n][1] = fibonacci_arr[n - 1][1] + fibonacci_arr[n - 2][1];
-            }
-
-            fibonacci_arr[n][2]
-        }
-    }
 }
