@@ -1,4 +1,3 @@
-use std::collections::VecDeque;
 use std::fmt::Write;
 use std::io::{stdin, Read};
 
@@ -31,10 +30,44 @@ fn main() {
         for i in 0..n {
             for j in 0..m {
                 if map[i][j] {
-                    let mut dq = VecDeque::new();
-                    dq.push_back(Node { x: j, y: i });
-                    dfs(&mut dq, &mut map);
-                    // bfs(&mut dq, &mut map);
+                    let mut dq = Vec::new();
+                    dq.push(Node { x: j, y: i });
+                    while dq.len() > 0 {
+                        let node = dq.pop();
+                        match node {
+                            Some(node) => {
+                                if map[node.y][node.x] {
+                                    map[node.y][node.x] = false;
+
+                                    if node.x > 0 {
+                                        dq.push(Node {
+                                            x: node.x - 1,
+                                            y: node.y,
+                                        });
+                                    }
+                                    if node.x + 1 < map[0].len() {
+                                        dq.push(Node {
+                                            x: node.x + 1,
+                                            y: node.y,
+                                        });
+                                    }
+                                    if node.y > 0 {
+                                        dq.push(Node {
+                                            x: node.x,
+                                            y: node.y - 1,
+                                        });
+                                    }
+                                    if node.y + 1 < map.len() {
+                                        dq.push(Node {
+                                            x: node.x,
+                                            y: node.y + 1,
+                                        });
+                                    }
+                                }
+                            }
+                            None => {}
+                        }
+                    }
                     count = count + 1;
                 }
             }
@@ -44,80 +77,4 @@ fn main() {
     }
 
     println!("{}", output);
-}
-
-fn dfs(dq: &mut VecDeque<Node>, map: &mut Vec<Vec<bool>>) {
-    let node = dq.pop_back();
-    match node {
-        Some(node) => {
-            map[node.y][node.x] = false;
-            let mut x_list: Vec<usize> = vec![];
-            let mut y_list: Vec<usize> = vec![];
-
-            if node.x > 0 {
-                x_list.push(node.x - 1);
-            }
-            if node.x + 1 < map[0].len() {
-                x_list.push(node.x + 1);
-            }
-            if node.y > 0 {
-                y_list.push(node.y - 1);
-            }
-            if node.y + 1 < map.len() {
-                y_list.push(node.y + 1);
-            }
-
-            for y in y_list {
-                if map[y][node.x] {
-                    dq.push_back(Node { x: node.x, y });
-                    dfs(dq, map);
-                }
-            }
-            for x in x_list {
-                if map[node.y][x] {
-                    dq.push_back(Node { x, y: node.y });
-                    dfs(dq, map);
-                }
-            }
-        }
-        None => {}
-    }
-}
-
-fn bfs(dq: &mut VecDeque<Node>, map: &mut Vec<Vec<bool>>) {
-    let node = dq.pop_front();
-    match node {
-        Some(node) => {
-            map[node.y][node.x] = false;
-            let mut x_list: Vec<usize> = vec![];
-            let mut y_list: Vec<usize> = vec![];
-
-            if node.x > 0 {
-                x_list.push(node.x - 1);
-            }
-            if node.x + 1 < map[0].len() {
-                x_list.push(node.x + 1);
-            }
-            if node.y > 0 {
-                y_list.push(node.y - 1);
-            }
-            if node.y + 1 < map.len() {
-                y_list.push(node.y + 1);
-            }
-
-            for y in y_list {
-                if map[y][node.x] {
-                    dq.push_back(Node { x: node.x, y });
-                    bfs(dq, map);
-                }
-            }
-            for x in x_list {
-                if map[node.y][x] {
-                    dq.push_back(Node { x, y: node.y });
-                    bfs(dq, map);
-                }
-            }
-        }
-        None => {}
-    }
 }
