@@ -37,7 +37,6 @@ fn find_tree_index(tree_list: &Vec<usize>, h: &usize) -> usize {
 fn find_h(tree_list: &Vec<usize>, m: &usize) -> usize {
     let mut l = 0;
     let mut r = tree_list[tree_list.len() - 1];
-    let mut result = 0;
     while l < r {
         let mid = (l + r) / 2;
         let start_index = find_tree_index(tree_list, &mid);
@@ -46,11 +45,10 @@ fn find_h(tree_list: &Vec<usize>, m: &usize) -> usize {
             .map(|&height| height - mid)
             .sum();
         if sum >= *m {
-            result = mid;
             l = mid + 1;
         } else {
             r = mid;
         }
     }
-    result
+    l - 1
 }
