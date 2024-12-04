@@ -8,7 +8,7 @@ fn main() {
     stdin().read_to_string(&mut input).unwrap();
     let mut input = input.split_ascii_whitespace();
 
-    let n = input.next().unwrap().parse::<i32>().unwrap();
+    let n = input.next().unwrap().parse::<usize>().unwrap();
     let word = input.next().unwrap();
 
     for word in input {
