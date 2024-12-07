@@ -1,4 +1,3 @@
-use std::collections::BTreeMap;
 use std::fmt::Write;
 use std::io::{stdin, Read};
 
@@ -7,32 +6,29 @@ fn main() {
 
     let mut input = String::new();
     stdin().read_to_string(&mut input).unwrap();
-    let mut input = input.split_ascii_whitespace();
+    let mut input = input
+        .split_ascii_whitespace()
+        .map(|s| s.parse::<i32>().unwrap());
 
-    let n = input.next().unwrap().parse::<usize>().unwrap();
-    let mut tree_map: BTreeMap<i32, Vec<usize>> = BTreeMap::new();
+    let n = input.next().unwrap() as usize;
+    let mut num_indices: Vec<_> = input.enumerate().collect();
 
-    for i in 0..n {
-        let x = input.next().unwrap().parse::<i32>().unwrap();
+    num_indices.sort_unstable_by_key(|&(_, num)| num);
 
-        // tree_map.entry(x).or_insert(vec![]).push(i);
-        if !tree_map.contains_key(&x) {
-            tree_map.insert(x, vec![]);
+    let mut compressed = vec![0; n];
+    let mut unique_count = 0;
+
+    for i in 1..n {
+        let (index, num) = num_indices[i];
+
+        if num != num_indices[i - 1].1 {
+            unique_count += 1;
         }
-        let vec = tree_map.get_mut(&x).unwrap();
-        vec.push(i);
+
+        compressed[index] = unique_count;
     }
 
-    let mut output_vec: Vec<usize> = vec![0; n];
-    let mut ordinal = 0;
-    for vec in tree_map.values() {
-        for i in vec {
-            output_vec[*i] = ordinal;
-        }
-        ordinal = ordinal + 1;
-    }
-
-    for ord in output_vec {
+    for ord in compressed {
         write!(output, "{} ", ord).unwrap();
     }
 
