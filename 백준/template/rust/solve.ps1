@@ -1,0 +1,1 @@
+$env:RUST_BACKTRACE="1"; Get-Content .\input.txt -Encoding UTF8 | cargo run
