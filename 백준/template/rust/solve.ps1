@@ -1,1 +1,3 @@
-$env:RUST_BACKTRACE="1"; Get-Content .\input.txt -Encoding UTF8 | cargo run
+$env:RUST_BACKTRACE="full"
+$input = Get-Content .\input.txt -Encoding UTF8 | Out-String
+echo $input | cargo run
