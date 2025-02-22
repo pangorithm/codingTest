@@ -49,6 +49,8 @@ fn main() {
             if time <= result.0 {
                 result = (time, result_h);
             }
+        } else {
+            break;
         }
     }
 
