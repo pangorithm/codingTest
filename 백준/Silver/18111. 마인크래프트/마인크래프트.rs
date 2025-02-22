@@ -30,17 +30,16 @@ fn main() {
     for result_h in min_h..=max_h {
         let mut time = 0;
         let mut inventory = b as i32;
-        for i in 0..length {
-            let h = map[i];
-            let diff = h as i32 - result_h as i32;
+        map.iter().for_each(|&h| {
+            let diff = h - result_h;
             if diff > 0 {
                 time += diff * 2;
                 inventory += diff;
             } else if diff < 0 {
                 time -= diff;
-                inventory -= -diff;
+                inventory += diff;
             }
-        }
+        });
 
         if inventory >= 0 {
             if time <= result.0 {
