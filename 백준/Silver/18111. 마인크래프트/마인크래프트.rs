@@ -45,7 +45,7 @@ fn main() {
             }
         }
 
-        if inventory >= 0 && time >= 0 {
+        if inventory >= 0{
             if time <= result.0 {
                 result = (time, result_h);
             }
