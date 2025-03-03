@@ -6,15 +6,40 @@ fn main() {
     let mut input = input.split_ascii_whitespace();
 
     let n = input.next().unwrap().parse::<usize>().unwrap();
-    let _m = input.next().unwrap().parse::<usize>().unwrap();
+    let m = input.next().unwrap().parse::<usize>().unwrap();
     let word = input.next().unwrap();
 
     let pn = format!("I{}", "OI".repeat(n));
-    let count = word
-        .as_bytes()
-        .windows(pn.len())
-        .filter(|&w| w == pn.as_bytes())
-        .count();
+    let mut count = 0;
+
+    let mut i = pn.len();
+    while i <= m {
+        if &word[i - pn.len()..i] == pn {
+            count += 1;
+        } else {
+            i += 1;
+            continue;
+        }
+        let mut j = i + 2;
+        i = j;
+        while j <= m {
+            match &word[j - 2..j] {
+                "OI" => {
+                    count += 1;
+                    j += 2;
+                    i = j;
+                }
+                "IO" => {
+                    i += pn.len() - 2;
+                    break;
+                }
+                _ => {
+                    i += pn.len() - 1;
+                    break;
+                }
+            }
+        }
+    }
 
     println!("{}", count);
 }
