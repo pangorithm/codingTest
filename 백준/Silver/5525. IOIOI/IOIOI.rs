@@ -13,8 +13,9 @@ fn main() {
     let mut count = 0;
 
     let mut i = pn.len();
+    let len = 2 * n + 1;
     while i <= m {
-        if &word[i - pn.len()..i] == pn {
+        if &word[i - len..i] == pn {
             count += 1;
         } else {
             i += 1;
@@ -30,13 +31,18 @@ fn main() {
                     i = j;
                 }
                 "IO" => {
-                    i += pn.len() - 2;
+                    i += len - 2;
                     break;
                 }
-                _ => {
-                    i += pn.len() - 1;
+                "II" => {
+                    i += len - 1;
                     break;
                 }
+                "OO" => {
+                    i += len;
+                    break;
+                }
+                _ => (),
             }
         }
     }
