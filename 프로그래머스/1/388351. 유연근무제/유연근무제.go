@@ -1,6 +1,7 @@
 func solution(schedules []int, timelogs [][]int, startday int) int {
     answer := 0
     n := len(schedules);
+    startday -= 1
     
 loop:
     for i := 0; i < n; i++ {
@@ -10,7 +11,7 @@ loop:
         }
         
         for days := 0; days < 7; days++ {
-            if  (days + startday - 1) % 7 >= 5 {
+            if  (days + startday) % 7 >= 5 {
                 continue
             }
             if lineSchedule < timelogs[i][days] {
