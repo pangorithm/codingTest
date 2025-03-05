@@ -10,8 +10,7 @@ loop:
         }
         
         for days := 0; days < 7; days++ {
-            day := (days + startday) % 7 
-            if day == 0 || day == 6 {
+            if  (days + startday - 1) % 7 >= 5 {
                 continue
             }
             if lineSchedule < timelogs[i][days] {
